@@ -73,7 +73,8 @@ namespace AspNetCore.Security.CAS
 
             var returnTo = BuildReturnTo(Options.StateDataFormat.Protect(properties));
 
-            var authorizationEndpoint = $"{Options.CasServerUrlBase}/login?service={returnTo}";
+            var loginEndpoint = string.IsNullOrEmpty(Options.CasLoginUrl) ? $"{Options.CasServerUrlBase}/login" : Options.CasLoginUrl;
+            var authorizationEndpoint = $"{loginEndpoint}?service={returnTo}";
 
             if (Options.Renew)
             {
